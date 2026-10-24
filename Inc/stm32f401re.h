@@ -13,6 +13,24 @@
 
 #include <stdint.h>
 
+/* CR1 Bits */
+#define I2C_CR1_PE      (1U << 0)
+#define I2C_CR1_START   (1U << 8)
+#define I2C_CR1_STOP    (1U << 9)
+#define I2C_CR1_ACK     (1U << 10)
+#define I2C_CR1_SWRST   (1U << 15)
+
+/* SR1 Bits */
+#define I2C_SR1_SB      (1U << 0)
+#define I2C_SR1_ADDR    (1U << 1)
+#define I2C_SR1_BTF     (1U << 2)
+#define I2C_SR1_TXE     (1U << 7)
+#define I2C_SR1_AF      (1U << 10)
+
+/* SR2 Bits */
+#define I2C_SR2_BUSY    (1U << 1)
+
+
 /* GPIO Alternate Function Select */
 typedef enum{
     GPIO_AF0  = 0U,
@@ -138,6 +156,12 @@ typedef enum
 
 } GPIO_Mode_t;
 
+typedef enum{
+    S_Mode = 1U,
+    F_Mode = 0U
+}I2C_Clock_Mode_t;
+
+
 typedef struct{
 
     uint8_t pin;
@@ -148,5 +172,11 @@ typedef struct{
     GPIO_AF_t    af;
 
 }GPIO_Config_t;
+
+typedef struct {
+    uint8_t addr;
+    uint8_t len;
+    const uint8_t *data;
+} I2C_Config_t;
 
 #endif /* STM32F401RE_H */

@@ -1,6 +1,6 @@
 /**
  * @file gpio.c
- * @brief GPIO driver implementation for STM32F401RE
+ * @brief GPIO driver implementation for STM32
  *
  * This source file provides the implementation of the GPIO driver
  * functions declared in gpio.h. It includes GPIO pin configuration
@@ -107,7 +107,7 @@ void gpio_init( GPIO_RegDef_t* gpio, GPIO_Config_t *config ){
     gpio->PUPDR |= ((uint32_t)config->pupd << position); // Pull-UP or Pull-Down 
    
     /* gpio Output Type Configure */
-    if(config->mode == GPIO_MODE_OUTPUT){
+    if(config->mode == GPIO_MODE_OUTPUT || config->mode == GPIO_MODE_AF){
 
         if(config->type == GPIO_OUTPUT_PP ){
             gpio->OTYPER &= ~(1U << config->pin); //Push-Pull
